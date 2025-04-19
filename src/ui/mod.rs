@@ -70,6 +70,17 @@ fn manage_hierarcchy_panel(ctx: &mut egui::Context) -> f32 {
                                     println!("Create a triganle later");
                                 }
                             });
+
+                            ui.menu_button("Pyhsics", |ui| {
+                                if ui.button("Circle").clicked() {
+                                    println!("Create a circle later");
+                                }
+
+                                if ui.button("Triangle").clicked() {
+                                    println!("Create a triganle later");
+                                }
+                            });
+
                         });
                     }
                 );
