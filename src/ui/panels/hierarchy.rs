@@ -1,6 +1,11 @@
 use bevy_egui::egui;
+use bevy::prelude::*;
+use crate::ui::events::CreateEntity;
 
-pub fn manage_hierarchy_panels(ctx: &mut egui::Context) -> f32 {
+pub fn manage_hierarchy_panels(
+    ctx: &mut egui::Context,
+    event: &mut EventWriter<CreateEntity>
+) -> f32 {
     
     if ctx.input(|i| i.screen_rect.size().x <= 1.0 || i.screen_rect.size().y <= 1.0) {
         return 0.0;
@@ -18,25 +23,24 @@ pub fn manage_hierarchy_panels(ctx: &mut egui::Context) -> f32 {
                     |ui| {
                         ui.menu_button("Actions", |ui| {
                             ui.menu_button("Objects", |ui| {
+
                                 if ui.button("Circle").clicked() {
-                                    println!("Create a circle later");
+                                    event.write(CreateEntity::Circle);
                                 }
 
                                 if ui.button("Triangle").clicked() {
-                                    println!("Create a triganle later");
+                                    event.write(CreateEntity::Triangle);
                                 }
+
+                                if ui.button("Hexagon").clicked() {
+                                    event.write(CreateEntity::Hexagon);
+                                }
+
+                                if ui.button("Rectangle").clicked() {
+                                    event.write(CreateEntity::Rectangle);
+                                }
+
                             });
-
-                            ui.menu_button("Pyhsics", |ui| {
-                                if ui.button("Circle").clicked() {
-                                    println!("Create a circle later");
-                                }
-
-                                if ui.button("Triangle").clicked() {
-                                    println!("Create a triganle later");
-                                }
-                            });
-
                         });
                     }
                 );
