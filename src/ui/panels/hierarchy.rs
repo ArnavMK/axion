@@ -2,6 +2,10 @@ use bevy_egui::egui;
 
 pub fn manage_hierarchy_panels(ctx: &mut egui::Context) -> f32 {
     
+    if ctx.input(|i| i.screen_rect.size().x <= 1.0 || i.screen_rect.size().y <= 1.0) {
+        return 0.0;
+    }
+
     egui::SidePanel::left("Hierarchy")
         .resizable(true)
         .show(ctx, |ui| {
