@@ -28,15 +28,11 @@ pub fn manage_hierarchy_panels(
                                     event.write(CreateEntity::Circle);
                                 }
 
-                                if ui.button("Triangle").clicked() {
-                                    event.write(CreateEntity::Triangle);
+                                if ui.button("Regular Poly").clicked() {
+                                    event.write(CreateEntity::ConvexPolygon);
                                 }
 
-                                if ui.button("Hexagon").clicked() {
-                                    event.write(CreateEntity::Hexagon);
-                                }
-
-                                if ui.button("Rectangle").clicked() {
+                                if ui.button("Box").clicked() {
                                     event.write(CreateEntity::Rectangle);
                                 }
 

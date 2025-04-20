@@ -3,6 +3,7 @@ use crate::scene_manager::*;
 use bevy::prelude::*;
 
 pub mod ui;
+pub mod physics;
 pub mod scene_manager;
 
 fn main() {

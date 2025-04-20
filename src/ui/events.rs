@@ -3,9 +3,8 @@ use bevy::prelude::*;
 #[derive(Event)]
 pub enum CreateEntity {
     Circle,
-    Triangle,
     Rectangle,
-    Hexagon
+    ConvexPolygon 
 }
 
 pub struct UiEvents;
