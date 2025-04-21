@@ -21,7 +21,7 @@ pub fn handle_entity_spawning(
                 commands.spawn((
                     Mesh2d(meshes.add(Circle::new(50.0))),
                     MeshMaterial2d(materials.add(ColorMaterial::from_color(Color::srgb(0.2, 0.1, 0.0)))),
-                    Transform::from_translation(Vec3::new(0., 0., 0.)),
+                    Transform::from_translation(Vec3::new(1.2, 0., 0.)),
                     Collider {
                         shape: CircleShape {radius: 50.0}
                     }
