@@ -1,7 +1,7 @@
 use bevy::prelude::*;
 use crate::ui::events::*;
 use crate::physics::collider::*;
-use crate::physics::shapes::{circle::*, convex_polygon::*, rectangle::*};
+use crate::physics::shapes::*;
 
 pub fn handle_entity_spawning(
     mut spawner_events: EventReader<CreateEntity>,
