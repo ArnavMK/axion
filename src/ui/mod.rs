@@ -1,9 +1,8 @@
-use bevy::window::PrimaryWindow;
-use bevy_egui::{EguiContextPass, EguiContexts, EguiPlugin};
-use bevy::prelude::*;
-use crate::ui::panels::hierarchy::*;
-use crate::ui::panels::inspector::*;
+use bevy_egui::{EguiContextPass, EguiPlugin};
 use events::*;
+use bevy::prelude::*;
+use panels::hierarchy::*;
+use panels::inspector::*;
 
 pub mod panels;
 pub mod events;
@@ -16,23 +15,10 @@ impl Plugin for AxionUi {
                 enable_multipass_for_primary_context: true
             })
             .add_plugins(UiEvents)
-            .add_systems(EguiContextPass, ui_manager)
+            .add_systems(EguiContextPass, (manage_inspector_panel, manage_hierarchy_panels))
         ;
     }
 }
 
-fn ui_manager(
-    mut contexts: EguiContexts,
-    mut entity_creation_events: EventWriter<CreateEntity>,
-    window_query: Query<&Window, With<PrimaryWindow>>
-) {
-
-    if let Ok(_) = window_query.single() {
-        let ctx = contexts.ctx_mut();
-        manage_hierarchy_panels(ctx, &mut entity_creation_events);
-        manage_inspector_panel(ctx);
-    }
-
-}
 
     
