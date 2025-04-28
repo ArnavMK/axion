@@ -11,12 +11,9 @@ fn main() {
         .insert_resource(ClearColor(Color::srgb(0.25, 0.25, 0.25)))
         .add_systems(Startup, setup_system)
         .add_plugins((DefaultPlugins, AxionUi, SceneManagerPlugin))
-        .run();
+    .run();
 }
 
-
-fn setup_system(
-    mut commands: Commands,
-) {
+fn setup_system(mut commands: Commands) {
     commands.spawn(Camera2d);
 }

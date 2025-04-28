@@ -24,7 +24,8 @@ pub fn handle_entity_spawning(
                     Transform::from_translation(Vec3::new(1.2, 0., 0.)),
                     Collider {
                         shape: CircleShape {radius: 50.0}
-                    }
+                    },
+                    Name::new("Circle")
                 )).id()
             }
 
@@ -35,7 +36,8 @@ pub fn handle_entity_spawning(
                     Transform::from_translation(Vec3::new(0., 0., 0.)),
                     Collider {
                         shape: RectangleShape { width: 50.0, height: 100.0},
-                    }
+                    },
+                    Name::new("Rectangle")
                 )).id()
             }
 
@@ -46,7 +48,8 @@ pub fn handle_entity_spawning(
                     Transform::from_translation(Vec3::new(0., 0., 0.)),
                     Collider {
                         shape: ConvexPolygonShape {circum_radius: 50.0, sides: 6}
-                    }
+                    },
+                    Name::new("Polygon")
                 )).id()
             }
         };
