@@ -5,11 +5,10 @@ use crate::ui::events::CreateEntity;
 pub fn manage_hierarchy_panels(
     mut contexts: EguiContexts,
     mut event: EventWriter<CreateEntity>,
-    window_query: Query<&Window, With<PrimaryWindow>>
+    window_query: Query<&Window, With<PrimaryWindow>>,
+    all_entities: Query<(Entity, &Name), With<Transform>>
 ) {
-
     if let Ok(_) = window_query.single() {
-
         let ctx = contexts.ctx_mut();
 
         egui::SidePanel::left("Hierarchy")
@@ -44,10 +43,18 @@ pub fn manage_hierarchy_panels(
                 });
 
                 ui.separator();
+                
+                ui.vertical(|ui| {
+                    for (i, (entity, name)) in all_entities.iter().enumerate() {
+                        ui.collapsing(format!("{} {}", name, i), |ui| {
+                            ui.horizontal(|ui| {
+                                ui.label(format!("Id: {:?}", entity))
+                            });
+                        }); 
+                    }
+                });
 
-                // Rest of your panel content...
                 ui.allocate_rect(ui.available_rect_before_wrap(), egui::Sense::hover());
-
                 ui.vertical(|ui| {
                     ui.strong("List of objects will go here!");
                 });
