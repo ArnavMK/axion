@@ -1,4 +1,4 @@
-use bevy::prelude::*;
+use bevy::{prelude::*, render};
 use spawner::*;
 use selection::*;
 use gizmos::*;
@@ -16,9 +16,12 @@ impl Plugin for SceneManagerPlugin {
             .init_resource::<SelectedEntity>()
             .init_gizmo_group::<GridGizmoGroup>()
             .init_gizmo_group::<OverlayGizmoGroup>()
-            .add_systems(Update, handle_entity_spawning)
             .add_systems(Startup, gizmo_config_setup)
-            .add_systems(Update, render_grid)
+            .add_systems(Update, (
+                attach_seelcted_entity_marker_component,
+                render_grid,
+                handle_entity_spawning
+            ))
         ;
     }
 } 

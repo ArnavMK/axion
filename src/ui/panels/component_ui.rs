@@ -59,9 +59,6 @@ impl ComponentUi for Transform {
                 });
                 ui.end_row();
 
-                let something = 10.0;
-                println!("{}", something);
-
                 ui.horizontal(|ui| {
                     if ui.button("Save").clicked() {
                         if let Ok(pos_x) = buffer.pos_x.parse::<f32>() {
@@ -155,7 +152,7 @@ impl ComponentUi for Collider<RectangleShape>{
             });
 
         let field_width = ui.available_width()/10.0;
-        ui.collapsing("Polygon Collider", |ui| {
+        ui.collapsing("Rectangel Collider", |ui| {
             ui.vertical(|ui| {
 
                 ui.horizontal(|ui| {
