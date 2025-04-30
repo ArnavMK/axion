@@ -7,12 +7,18 @@ pub enum CreateEntity {
     ConvexPolygon 
 }
 
+#[derive(Event)]
+pub struct RemoveEntity {
+    pub target: Entity
+}
+
 pub struct UiEvents;
 
 impl Plugin for UiEvents {
     fn build(&self, app: &mut App) {
         app
             .add_event::<CreateEntity>()
+            .add_event::<RemoveEntity>()
         ;
     }
 } 

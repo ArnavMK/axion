@@ -65,3 +65,13 @@ pub fn handle_entity_spawning(
     }
 
 }
+
+
+pub fn handle_entity_despawning(
+    mut commands: Commands,
+    mut entity_removeal_events: EventReader<RemoveEntity> 
+) {
+    for e in entity_removeal_events.read() {
+        commands.entity(e.target).despawn();
+    }
+}

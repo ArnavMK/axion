@@ -1,11 +1,12 @@
 use bevy_egui::{egui, EguiContexts};
 use bevy::{prelude::*, window::PrimaryWindow};
-use crate::ui::events::CreateEntity;
+use crate::ui::events::{CreateEntity, RemoveEntity};
 use crate::scene_manager::selection::*;
 
 pub fn manage_hierarchy_panels(
     mut contexts: EguiContexts,
-    mut event: EventWriter<CreateEntity>,
+    mut entity_creation_events: EventWriter<CreateEntity>,
+    mut entity_removal_events: EventWriter<RemoveEntity>,
     mut selection_events: EventWriter<SelectedEntityChanged>,
     window_query: Query<&Window, With<PrimaryWindow>>,
     all_entities: Query<(Entity, &Name), With<Transform>>,
@@ -28,15 +29,15 @@ pub fn manage_hierarchy_panels(
                                 ui.menu_button("Objects", |ui| {
 
                                     if ui.button("Circle").clicked() {
-                                        event.write(CreateEntity::Circle);
+                                        entity_creation_events.write(CreateEntity::Circle);
                                     }
 
                                     if ui.button("Regular Poly").clicked() {
-                                        event.write(CreateEntity::ConvexPolygon);
+                                        entity_creation_events.write(CreateEntity::ConvexPolygon);
                                     }
 
                                     if ui.button("Box").clicked() {
-                                        event.write(CreateEntity::Rectangle);
+                                        entity_creation_events.write(CreateEntity::Rectangle);
                                     }
 
                                 });
@@ -64,12 +65,15 @@ pub fn manage_hierarchy_panels(
                         
                         // a context menu belongin to the current entity
                         entity_collapsable.context_menu(|ui| {
+
                             if ui.button("Close").clicked() {
                                 ui.close_menu();
                             }
 
                             if ui.button("delete").clicked() {
-                                println!("Delete this entity please");
+                                entity_removal_events.write(RemoveEntity {
+                                    target: entity
+                                });
                                 ui.close_menu();
                             }
                         });

@@ -1,4 +1,4 @@
-use bevy::{prelude::*, render};
+use bevy::prelude::*;
 use spawner::*;
 use selection::*;
 use gizmos::*;
@@ -20,7 +20,8 @@ impl Plugin for SceneManagerPlugin {
             .add_systems(Update, (
                 attach_seelcted_entity_marker_component,
                 render_grid,
-                handle_entity_spawning
+                handle_entity_spawning,
+                handle_entity_despawning
             ))
         ;
     }
