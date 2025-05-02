@@ -29,7 +29,7 @@ pub fn manage_hierarchy_panels(
                                 ui.menu_button("Objects", |ui| {
 
                                     if ui.button("Circle").clicked() {
-                                        entity_creation_events.write(CreateEntity::Circle);
+                                        entity_creation_events.write(CreateEntity::Circle);     
                                     }
 
                                     if ui.button("Regular Poly").clicked() {
@@ -50,8 +50,10 @@ pub fn manage_hierarchy_panels(
                 
                 ui.vertical(|ui| {
                     for (i, (entity, name)) in all_entities.iter().enumerate() {
-                        let entity_collapsable = ui.collapsing(format!("{} {}", name, i), |_| {}).header_response;
-
+                        let entity_collapsable = ui.collapsing(format!("{} {}", name, i), |ui| {
+                            ui.label(format!("Id: {:?}", entity));
+                        }).header_response;
+                            
                         // entity selection
                         if entity_collapsable.clicked() {
                             let previous = selected_entity.get();
@@ -66,24 +68,22 @@ pub fn manage_hierarchy_panels(
                         // a context menu belongin to the current entity
                         entity_collapsable.context_menu(|ui| {
 
-                            if ui.button("Close").clicked() {
-                                ui.close_menu();
-                            }
-
                             if ui.button("delete").clicked() {
                                 entity_removal_events.write(RemoveEntity {
                                     target: entity
                                 });
                                 ui.close_menu();
                             }
+                            
+                            if ui.button("Close").clicked() {
+                                ui.close_menu();
+                            }
+
                         });
                     }
                 });
 
                 ui.allocate_rect(ui.available_rect_before_wrap(), egui::Sense::hover());
-                ui.vertical(|ui| {
-                    ui.strong("List of objects will go here!");
-                });
 
             })
         ;

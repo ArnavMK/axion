@@ -37,12 +37,10 @@ pub fn attach_seelcted_entity_marker_component(
 ) {
     for e in event.read() {
         if let Some(entity) = e.previous {
-            println!("Removed marker from {:?}", entity);
             commands.entity(entity).remove::<SelectedEntityMarkerComponent>();
         }
 
         if let Some(entity) = e.current {
-            println!("Added marker to {:?}", entity);
             commands.entity(entity).insert(SelectedEntityMarkerComponent);
         }
     }

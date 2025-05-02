@@ -10,5 +10,5 @@ opt-level = 1
 opt-level = 3
 
 [dependencies]
-bevy = "0.16.0-rc.5"
-bevy_egui = "0.34.0-rc.3"
+bevy = "0.16.0"
+bevy_egui = "0.34.1"
